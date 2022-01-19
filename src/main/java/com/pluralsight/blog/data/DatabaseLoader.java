@@ -35,12 +35,13 @@ public class DatabaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         authors.addAll(Arrays.asList(
-                new Author("sholderness", "Sarah", "Holderness", "password"),
-                new Author("tbell", "Tom", "Bell", "password"),
-                new Author("tbell", "Tom", "Bell", "password"),
-                new Author("csouza", "Carlos", "Souza", "password")
+                new Author("sholderness", "Sarah",  "Holderness", "password"),
+                new Author("tbell", "Tom",  "Bell", "password"),
+                new Author("efisher", "Eric",  "Fisher", "password"),
+                new Author("csouza", "Carlos",  "Souza", "password")
         ));
-        this.authorRepository.saveAll(authors);
+
+        authorRepository.saveAll(authors);
 
         IntStream.range(0, 40).forEach(i -> {
 
@@ -58,7 +59,7 @@ public class DatabaseLoader implements ApplicationRunner {
             randomPosts.add(post);
         });
 
-        this.postRepository.saveAll(randomPosts);
-        this.authorRepository.saveAll(authors);
+        postRepository.saveAll(randomPosts);
+        authorRepository.saveAll(authors);
     }
 }
