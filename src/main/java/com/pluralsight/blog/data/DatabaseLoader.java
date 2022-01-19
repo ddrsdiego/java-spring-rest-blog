@@ -48,24 +48,17 @@ public class DatabaseLoader implements ApplicationRunner {
             String gadget = gadgets[i % gadgets.length];
 
             String title = String.format(template, gadget);
-            Post post = new Post(title, "Lorem ipsum dolor sit amet, consectetur adipiscing elit… ");
 
             Author author = authors.get(i % authors.size());
-            if (author != null) {
-                author.addPost(post);
-                post.setAuthor(author);
-            }
+            Post post = new Post(title, "Lorem ipsum dolor sit amet, consectetur adipiscing elit… ");
+
+            post.setAuthor(author);
+            author.addPost(post);
 
             randomPosts.add(post);
         });
 
-        try {
-
-            this.postRepository.saveAll(randomPosts);
-            this.authorRepository.saveAll(authors);
-
-        } catch (Exception e) {
-            String error = e.getLocalizedMessage();
-        }
+        this.postRepository.saveAll(randomPosts);
+        this.authorRepository.saveAll(authors);
     }
 }
